@@ -10,9 +10,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
         externalNativeBuild {
             cmake {
-                arguments "-DANDROID_ABI=arm64-v8a"
+//                arguments "-DANDROID_ABI=arm64-v8a"
                 cppFlags "-fexceptions -ffast-math"
             }
         }
@@ -27,9 +30,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     externalNativeBuild {
         cmake {
-            path "CMakeLists.txt"
+            path "src/main/cpp/CMakeLists.txt"
         }
     }
 }

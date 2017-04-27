@@ -19,11 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib");
-    }
-
     private LinearLayout lt;
 
     private class ImagePair {
@@ -45,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... params) {
                 ArrayList<ImagePair> images = new ArrayList<>();
-//                images.add(new ImagePair("128", R.mipmap.p128));
-//                images.add(new ImagePair("256", R.mipmap.p256));
-//                images.add(new ImagePair("512", R.mipmap.p512));
+                images.add(new ImagePair("128", R.mipmap.p128));
+                images.add(new ImagePair("256", R.mipmap.p256));
+                images.add(new ImagePair("512", R.mipmap.p512));
 //                images.add(new ImagePair("1024", R.mipmap.p1024));
-                images.add(new ImagePair("2048", R.mipmap.p2048));
+//                images.add(new ImagePair("2048", R.mipmap.p2048));
 
                 long start;
                 long stop;
