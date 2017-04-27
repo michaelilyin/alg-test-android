@@ -6,12 +6,12 @@ cmake_minimum_required(VERSION 3.4.1)
 
 set(CMAKE_VERBOSE_MAKEFILE on)
 
-set(LIB_DIR ${CMAKE_SOURCE_DIR}/../../../libs)
+set(LIB_DIR ./libs)
 
 #include_directories(${LIB_DIR}/include/)
 
 add_library( lib_ocl SHARED IMPORTED )
-set_target_properties(lib_ocl PROPERTIES IMPORTED_LOCATION ${LIB_DIR}/libPVROCL.so)
+set_target_properties(lib_ocl PROPERTIES IMPORTED_LOCATION ${LIB_DIR}/${ANDROID_ABI}/libPVROCL.so)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 add_library( cl_test SHARED cl_test.cpp )
