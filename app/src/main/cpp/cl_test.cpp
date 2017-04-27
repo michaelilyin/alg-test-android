@@ -51,7 +51,7 @@ bool gotError(const char *msg) {
 }
 
 
-jint Java_net_mkonrad_climageproc_ClJNIGlue_initCL(JNIEnv *env, jobject obj)  {
+jint Java_ru_michaelilyin_alg1_CLUtils_initCL(JNIEnv *env, jobject obj)  {
     init_ok = false;
 
     kernel_name = NULL;
@@ -136,7 +136,7 @@ bool createProg(const char *k_name, const char **prog_src, cl_uint src_count, co
     return true;
 }
 
-jint Java_net_mkonrad_climageproc_ClJNIGlue_createProg(JNIEnv *env, jobject obj,
+jint Java_ru_michaelilyin_alg1_CLUtils_createProg(JNIEnv *env, jobject obj,
                                                        jstring progName,
                                                        jobject progSrcBuf) {
     // get the name
@@ -185,7 +185,7 @@ jint Java_net_mkonrad_climageproc_ClJNIGlue_createProg(JNIEnv *env, jobject obj,
 }
 
 
-jint Java_net_mkonrad_climageproc_ClJNIGlue_createKernel(JNIEnv *env, jobject obj) {
+jint Java_ru_michaelilyin_alg1_CLUtils_createKernel(JNIEnv *env, jobject obj) {
     kernel = clCreateKernel(program, kernel_name, &err);
 
     if (gotError("CLBase: Error creating OpenCL kernel")) {
@@ -202,7 +202,7 @@ jint Java_net_mkonrad_climageproc_ClJNIGlue_createKernel(JNIEnv *env, jobject ob
     return 0;
 }
 
-jint Java_net_mkonrad_climageproc_ClJNIGlue_createCmdQueue(JNIEnv *env, jobject obj) {
+jint Java_ru_michaelilyin_alg1_CLUtils_createCmdQueue(JNIEnv *env, jobject obj) {
     // Create a command queue
     queue = clCreateCommandQueue(context, device, 0, &err);
 
@@ -213,7 +213,7 @@ jint Java_net_mkonrad_climageproc_ClJNIGlue_createCmdQueue(JNIEnv *env, jobject 
     return 0;
 }
 
-jfloat Java_net_mkonrad_climageproc_ClJNIGlue_setKernelArgs(JNIEnv *env, jobject obj,
+jfloat Java_ru_michaelilyin_alg1_CLUtils_setKernelArgs(JNIEnv *env, jobject obj,
                                                             jint width, jint height,
                                                             jobject inputImgBuf) {
 
@@ -276,7 +276,7 @@ size_t roundUp(int groupS, int globalS) {
     }
 }
 
-jfloat Java_net_mkonrad_climageproc_ClJNIGlue_executeKernel(JNIEnv *env, jobject obj) {
+jfloat Java_ru_michaelilyin_alg1_CLUtils_executeKernel(JNIEnv *env, jobject obj) {
     size_t workSizePerDim = sqrt(max_work_group_size);		// Square root, because maxWorkGroupSize is for dim = 1, but we have dim = 2!
     local_ws[0] = local_ws[1] = workSizePerDim;
 
@@ -308,7 +308,7 @@ jfloat Java_net_mkonrad_climageproc_ClJNIGlue_executeKernel(JNIEnv *env, jobject
     return execTime;
 }
 
-jfloat Java_net_mkonrad_climageproc_ClJNIGlue_getResultImg(JNIEnv *env, jobject obj,
+jfloat Java_ru_michaelilyin_alg1_CLUtils_getResultImg(JNIEnv *env, jobject obj,
                                                            jobject outputImgBuf) {
 
     void *outImg = (void *)(env->GetDirectBufferAddress(outputImgBuf));
@@ -336,7 +336,7 @@ jfloat Java_net_mkonrad_climageproc_ClJNIGlue_getResultImg(JNIEnv *env, jobject 
     return execTime;
 }
 
-void Java_net_mkonrad_climageproc_ClJNIGlue_dealloc(JNIEnv *env, jobject obj) {
+void Java_ru_michaelilyin_alg1_CLUtils_dealloc(JNIEnv *env, jobject obj) {
     clReleaseMemObject(mem_out);
     clReleaseMemObject(mem_in);
     clReleaseSampler(sampler);
@@ -348,7 +348,7 @@ void Java_net_mkonrad_climageproc_ClJNIGlue_dealloc(JNIEnv *env, jobject obj) {
     if (kernel_name) delete kernel_name;
 }
 
-void Java_net_mkonrad_climageproc_ClJNIGlue_printInfo(JNIEnv *env, jobject obj) {
+void Java_ru_michaelilyin_alg1_CLUtils_printInfo(JNIEnv *env, jobject obj) {
 /*	const cl_platform_info platInfoIds[] = {
 			CL_PLATFORM_NAME,
 			CL_PLATFORM_VENDOR,

@@ -1,5 +1,5 @@
 #pragma version(1)
-#pragma rs java_package_name(ru.michaelilyin.alg)
+#pragma rs java_package_name(ru.michaelilyin.alg1)
 
 static const float k[25] = { 0.0030, 0.0133, 0.0219, 0.0133, 0.0030,
                             0.0133, 0.0596, 0.0983, 0.0596, 0.0133,
